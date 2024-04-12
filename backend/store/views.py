@@ -11,23 +11,36 @@ from django.http import JsonResponse
 class UserCartViewSet(viewsets.ModelViewSet):
     queryset = UserCart.objects.all()
     serializer_class = UserCartSerializer
-
-    @action(detail=True, methods=['GET'])
-    def get_user_cart(self, request, pk=True):
-
-        # If the user does not have a cart, create one for them.
+    
+    def partial_update(self, request, pk=None):
+        """
+        Update a user's cart.
+        """
+        
         user_id = pk
-        if not UserCart.objects.filter(user_id=user_id).exists():
-             UserCart.objects.create(user_id=user_id)
+        
 
+    def retrieve(self, request, pk=None):
+        """
+        Retrieve a user's cart.
+        """
+           
+        user_id = pk
+        
+        #TODO: check valid user ID
+        
+        # Get user_cart if exist, if not create one for them.
+        (user_cart, is_created) = UserCart.objects.get_or_create(user_id=user_id)
+        
+        # Get all items in the user's cart.
         items_in_cart = CartItem.items_in_cart_manager.get_items_in_cart(user_id)
         
         return Response({
-             'items_in_cart': ItemInCartSerializer(items_in_cart, many=True).data,
-            #  'total_price': sum([item.product.price * item.quantity for item in items_in_cart])
+            'user_cart': UserCartSerializer(user_cart ).data,
+            'items_in_cart': ItemInCartSerializer(items_in_cart, many=True).data,
         })
-
-        
+    
+    
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
