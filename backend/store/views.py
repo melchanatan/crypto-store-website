@@ -21,8 +21,8 @@ class UserCartViewSet(viewsets.ModelViewSet):
         
 
     def retrieve(self, request, pk=None):
-        """
-        Retrieve a user's cart.
+        """        
+        Get User cart infos, if user is not registered create one for them.
         """
            
         user_id = pk
