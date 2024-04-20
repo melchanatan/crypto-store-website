@@ -1,0 +1,52 @@
+{
+  "workbench.iconTheme": "vscode-icons",
+  "color-highlight.matchRgbWithNoFunction": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "editor.fontSize": 16,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "vsicons.dontShowNewVersionMessage": true,
+  "editor.linkedEditing": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.cursorSmoothCaretAnimation": "on",
+  "terminal.integrated.fontFamily": "\"Fira Code\", monospace",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": false,
+  "arduino.commandPath": "C:\\Users\\Admin\\AppData\\Local\\Programs\\Arduino IDE.exe",
+  "code-runner.runInTerminal": true,
+  "css.format.enable": false,
+  "editor.fontFamily": "'Fira code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "window.menuBarVisibility": "compact",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.inlayHints.enabled": "off",
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f"
+  },
+  "diffEditor.wordWrap": "off",
+  "editor.guides.indentation": false,
+  "editor.guides.bracketPairs": false,
+  "editor.formatOnSave": true,
+  "workbench.colorTheme": "Oceanic Next",
+  "files.autoSave": "onFocusChange",
+  "editor.wordWrap": "on",
+  "cloudcode.duetAI.project": "rayong-mini-bus",
+  "indenticator.languageSpecific": {},
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "dart.flutterSdkPath": "/Users/melchanatan/Documents/Dev/flutter",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cloudcode.duetAI.inlineSuggestions.enableAuto": true
+}

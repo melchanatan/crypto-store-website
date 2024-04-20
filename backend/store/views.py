@@ -11,7 +11,7 @@ from django.http import JsonResponse
 class UserCartViewSet(viewsets.ModelViewSet):
     queryset = UserCart.objects.all()
     serializer_class = UserCartSerializer
-    
+
     @action(methods=['GET'], detail=True)
     def get_total(self, request, pk=None):
         """
@@ -62,7 +62,6 @@ class UserCartViewSet(viewsets.ModelViewSet):
             'total_cost': round(total_cost - total_dicount, 2)
         })        
 
-    
     @action(methods=['PATCH'], detail=True)
     def update_promotion(self, request, pk=None):
         """
@@ -87,6 +86,7 @@ class UserCartViewSet(viewsets.ModelViewSet):
                 'message': 'Promotion removed successfully',
                 'user_cart': UserCartSerializer(user_cart).data
             })
+            
         else:
             # Add Promotion to user cart
             
@@ -99,7 +99,6 @@ class UserCartViewSet(viewsets.ModelViewSet):
             return Response({
                 'user_cart': UserCartSerializer(user_cart).data,
             })
-
 
     def retrieve(self, request, pk=None):
         """        
@@ -172,7 +171,6 @@ class CartItemViewSet(viewsets.ModelViewSet):
             'message': 'Item quantity updated successfully',
         })
 
-        
     def create(self, request):
         request_data = request.data
         

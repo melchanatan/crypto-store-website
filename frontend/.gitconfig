@@ -1,0 +1,7 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = mels
+	email = chanatan.melmel@gmail.com
+[credential]
+	helper = "!f() { /home/node/.vscode-server/bin/903b1e9d8990623e3d7da1df3d33db3e42d80eda/node /tmp/vscode-remote-containers-b5d5138c-de8a-4a8c-b3a5-65f7bdbca4ad.js git-credential-helper $*; }; f"

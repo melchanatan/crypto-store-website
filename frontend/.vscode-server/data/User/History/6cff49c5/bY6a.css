@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #234ca1;
+  --background-darken: #212529;
+  --background: #2a2d38;
+}
+
+@keyframes hero-image-bounce {
+  0%, 100% {
+    transform: translateY(55%);
+  }
+  50% {
+    transform: translateY(45%);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .c-nav__icon-list li {
+    @apply c-nav__icon-box;
+  }
+
+  .c-nav__icon-list li svg {
+    @apply c-nav__icon; 
+  }
+}
+
+.custom-border-radius {
+  border-radius: 30% 30% 10% 10% / 15% 15% 0% 0% ;
+}
+.padding-page {
+  @apply px-2 md:px-[10vw]
+}
+
+.c-nav__icon-box {
+  @apply hover:bg-gray-300/20 transition-all duration-300 rounded-full hover:fill-white hover:stroke-white ;
+}
+.c-nav__icon {
+  @apply w-[52px] h-[52px] stroke-gray-400 fill-gray-400 group-hover:stroke-white  duration-300 transition-all p-3;
+}
+
+.c-nav__avatar {
+  @apply w-[32px] h-[32px] bg-gray-500 rounded-full overflow-hidden ml-3;
+}
+
+.c-hero__img {
+  @apply w-[55%] absolute bottom-[50%];
+}
+
+#hero {
+  @apply text-white;
+}
+
+h2 {
+  @apply text-3xl font-prompt font-semibold mb-3 leading-[120%] uppercase inline-block relative px-4 z-[2];
+}
+
+h2::after {
+  @apply block w-[100%] h-[4px] bg-primary opacity-40 rounded-full mb-3 content-[''] absolute bottom-[-5px] left-0 z-[1];
+}
+.sub-heading {
+  @apply text-lg font-prompt text-primary leading-[120%] uppercase;
+}
+
+.glass-blur {
+  @apply bg-gray-200/80 backdrop-blur-sm rounded-full;
+}
+
+.percentage--up {
+  @apply text-green-600 text-sm before:content-['+'] after:content-['%']
+}
+
+.percentage--down {
+  @apply text-red-600 text-sm before:content-['-'] after:content-['%']
+}
