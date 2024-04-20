@@ -12,19 +12,22 @@ const Cart = () => {
 
     const CartOverlay = () => {
         return (
-            <div
-                className="absolute top-[52px] right-0 w-[300px] bg-white rounded-tr-[0] rounded-md py-2 font-prompt divide-y"
-            >
-                <CartItem />
-                <CartItem />
-                <div className="flex items-end justify-between relative px-3 pt-4 border-t-[1px] solid border-gray-400 shadow-[0px_-3px_5px_0px_#00000024]">
-                    <p className="leading-4">
-                        total:
-                        <h4 className="font-bold text-xl mb-1t">$100</h4>
-                    </p>
-                    <button className="bg-primary text-white px-3 py-2 font-prompt">checkout</button>
-                </div>
-            </div >
+            <>
+                <img src="/inverted-corner.svg" alt="" className="absolute bottom-0 translate-y-[-36%] right-[52px] w-4 h-4" />
+                <div
+                    className="absolute top-[52px] right-0 w-[300px] bg-white rounded-tr-[0] rounded-md py-2 font-prompt divide-y"
+                >
+                    <CartItem />
+                    <CartItem />
+                    <div className="flex items-end justify-between relative px-3 pt-4 border-t-[1px] solid border-gray-400 shadow-[0px_-3px_5px_0px_#00000024]">
+                        <p className="leading-4">
+                            total:
+                            <h4 className="font-bold text-xl mb-1t">$100</h4>
+                        </p>
+                        <button className="bg-primary text-white px-3 py-2 font-prompt">checkout</button>
+                    </div>
+                </div >
+            </>
         )
     }
 
@@ -38,7 +41,7 @@ const Cart = () => {
                     <p className="text-sm text-gray-500">$100</p>
                 </label>
                 <div className="ml-auto flex">
-                    <input type="text" className="w-[5ch] bg-gray-200 text-center" />
+                    <input type="text" className="w-[5ch] bg-gray-200 text-center " />
                     <button className="p-2 bg-primary text-white text-xl">
                         <FaPlus />
                     </button>
