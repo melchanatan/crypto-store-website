@@ -40,6 +40,14 @@ class UserCartViewSet(viewsets.ModelViewSet):
         num_items = len(items_in_cart)
         total_cost = calculate_total_cost(items_in_cart)
         
+        if promotion == None:
+            return Response({
+                'total': round(total_cost, 2),
+                'discount': 0,
+                'discount_percentage': 0,
+                'subtotal': round(total_cost, 2)
+            })
+        
         discount_percentage = float(promotion['discount_percentage']) / 100
         minimum_cart_price = float(promotion["minimum_cart_price"])
         minimum_cart_quanity = float(promotion["minimum_cart_quanity"])
@@ -57,9 +65,10 @@ class UserCartViewSet(viewsets.ModelViewSet):
                 total_dicount += total_cost * discount_percentage
 
         return Response({
-            'cost': round(total_cost, 2),
+            'total': round(total_cost, 2),
+            'discount_percentage': discount_percentage*100,
             'discount': round(total_dicount, 2),
-            'total_cost': round(total_cost - total_dicount, 2)
+            'subtotal': round(total_cost - total_dicount, 2)
         })        
 
     @action(methods=['PATCH'], detail=True)
@@ -67,17 +76,17 @@ class UserCartViewSet(viewsets.ModelViewSet):
         """
         Update promotion for user cart.
         """
-    
+
         user_id = pk
         request_data = request.data
         
-        promotion_id = request_data.get('promotion_id')
-        if promotion_id == None:
-            return Response({'error': 'promotion_id is required'}, status=400)
+        promotion_code = request_data.get('promotion_code')
+        if promotion_code == None:
+            return Response({'error': 'promotion_code is required'}, status=400)
                 
         # Handle user remove promotion using "-" as parameter.
         user_cart = get_object_or_404(UserCart, user_id=user_id)
-        if (promotion_id == "-"):
+        if (promotion_code == ""):
             user_cart.selected_promotion = None
             user_cart.save()
         
@@ -91,12 +100,20 @@ class UserCartViewSet(viewsets.ModelViewSet):
             # Add Promotion to user cart
             
             # Get user cart and promotion object
-            promotion_object = get_object_or_404(Promotion, pk=promotion_id)
+            if not Promotion.objects.filter(name=promotion_code).exists():
+                return Response({
+                    'status': 'error',
+                    'message': 'Promotion not found'
+                }, status=404)
+            
+            promotion_object = Promotion.objects.get(name=promotion_code)
             
             user_cart.selected_promotion = promotion_object
             user_cart.save()
             
             return Response({
+                'status': 'success',
+                'message': 'Promotion added successfully',
                 'user_cart': UserCartSerializer(user_cart).data,
             })
 

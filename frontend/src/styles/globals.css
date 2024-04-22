@@ -81,3 +81,7 @@ h2::after {
 .percentage--down {
   @apply text-red-600 text-sm before:content-['-'] after:content-['%']
 }
+
+.button-animate {
+  @apply hover:brightness-75 active:scale-110 transition-all;
+}
