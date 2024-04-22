@@ -7,7 +7,7 @@ const FeatureSection = () => {
   const [productInfos, setProductInfos] = useState([]);
 
   const fetchProducts = async () => {
-    const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/product/");
+    const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/product/");
     const data = await response.json();
     return data;
   }
@@ -30,12 +30,12 @@ const FeatureSection = () => {
         </div>
         <FeatureListView>
           {
-            // productInfos.map((productInfo) => (
-            //   <FeatureListView.ListItem
-            //     key={productInfo.id}
-            //     productInfo={productInfo}
-            //   />
-            // ))
+            productInfos.map((productInfo) => (
+              <FeatureListView.ListItem
+                key={productInfo.id}
+                productInfo={productInfo}
+              />
+            ))
           }
         </FeatureListView>
       </section>
