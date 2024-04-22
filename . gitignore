@@ -7,3 +7,8 @@ node/
 **/frontend/node_modules/**
 **/frontend/node/**
 **/frontend/.next
+
+frontend/.dotnet/
+frontend/.env.local
+frontend/.gnupg/
+frontend/.ssh/

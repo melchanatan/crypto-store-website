@@ -1,6 +1,23 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import FeatureListView from "@/components/feature/FeatureListView";
+
+
 const FeatureSection = () => {
+  const [productInfos, setProductInfos] = useState([]);
+
+  const fetchProducts = async () => {
+    const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/product/");
+    const data = await response.json();
+    return data;
+  }
+
+  useEffect(() => {
+    fetchProducts().then((data) => {
+      console.log(data);
+    });
+  }, []);
+
   return (
     <>
       <section
@@ -12,9 +29,14 @@ const FeatureSection = () => {
           <h2>Top Collection</h2>
         </div>
         <FeatureListView>
-          <FeatureListView.ListItem />
-          <FeatureListView.ListItem />
-          <FeatureListView.ListItem />
+          {
+            // productInfos.map((productInfo) => (
+            //   <FeatureListView.ListItem
+            //     key={productInfo.id}
+            //     productInfo={productInfo}
+            //   />
+            // ))
+          }
         </FeatureListView>
       </section>
       <section
@@ -26,7 +48,8 @@ const FeatureSection = () => {
           <h2>Top Collection</h2>
         </div>
         <div className="padding-page grid grid-cols-1 md:grid-cols-2 gap-3">
-          <FeatureListView.GridDisplay /> <FeatureListView.GridDisplay />
+          <FeatureListView.GridDisplay />
+          <FeatureListView.GridDisplay />
         </div>
       </section>
     </>

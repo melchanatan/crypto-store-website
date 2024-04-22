@@ -4,4 +4,4 @@
 	name = mels
 	email = chanatan.melmel@gmail.com
 [credential]
-	helper = "!f() { /home/node/.vscode-server/bin/903b1e9d8990623e3d7da1df3d33db3e42d80eda/node /tmp/vscode-remote-containers-b5d5138c-de8a-4a8c-b3a5-65f7bdbca4ad.js git-credential-helper $*; }; f"
+	helper = "!f() { /home/node/.vscode-server/bin/e170252f762678dec6ca2cc69aba1570769a5d39/node /tmp/vscode-remote-containers-8757196b-7c81-4515-b68d-8eb2a91684e8.js git-credential-helper $*; }; f"

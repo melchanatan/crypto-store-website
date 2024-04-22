@@ -42,3 +42,8 @@ jspm_packages
 .cache
 .vscode-server
 .vscode
+
+.env.local
+.ssh
+.dotnet
+.gnupg
