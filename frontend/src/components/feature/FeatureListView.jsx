@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import { Suspense, lazy } from "react";
 import { FaEthereum } from "react-icons/fa";
 import Button from "@/components/global/Button";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { UserInfoContext } from "@/utils/UserInfoProvider";
 
 const FeatureListView = ({ children }) => {
   return (
@@ -16,10 +17,25 @@ const FeatureListView = ({ children }) => {
 };
 
 const ListItem = ({ productInfo }) => {
-  const name = "yse";
-  const description = "yse";
-  const price = "yse";
-  const quanityOnHand = "yse";
+  const { name, description, price, id } = productInfo;
+  const { userInfo } = useContext(UserInfoContext);
+
+  const addItemToCart = async () => {
+    const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + `/cart-item/`,
+      {
+        'method': 'POST',
+        headers: {
+          'Authorization': `Bearer ${userInfo.token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'product_id': id,
+          'user_id': userInfo.id,
+        })
+      })
+    const data = await response.json()
+    console.log(data)
+  };
 
   return (
     <li className="p-3 bg-white shadow-md flex flex-col items-center rounded-xl border-gray-300 border-[1px] gap-3">
@@ -51,7 +67,7 @@ const ListItem = ({ productInfo }) => {
               <p className="text-black font-semibold">{price} ETH</p>
             </div>
           </div>
-          <Button text="Place a bid" isSmall={true}></Button>
+          <Button text="Place a bid" isSmall={true} onClick={addItemToCart}></Button>
         </div>
       </article>
     </li>

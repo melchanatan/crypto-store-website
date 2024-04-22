@@ -182,6 +182,17 @@ class CartItemViewSet(viewsets.ModelViewSet):
                 'message': 'user_id and product_id are required'
             }, status=400)
         
+        # Check if cart-item already exist
+        cart_item = CartItem.objects.filter(user_cart__user_id=user_id, product__pk=product_id).first()
+        if cart_item:
+            cart_item.quantity += 1
+            cart_item.save()
+            
+            return Response({
+                'status': 'success',
+                'message': 'Item already in user cart, quantity updated',
+            })
+        
         user_cart = get_object_or_404(UserCart, user_id=user_id)
         product = get_object_or_404(Product, pk=product_id)
         

@@ -1,6 +1,8 @@
 import { Inter, Prompt } from "next/font/google";
 import "@/styles/globals.css";
 import Footer from "@/components/global/Footer";
+import UserInfoProvider from "@/utils/UserInfoProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 const prompt = Prompt({
   subsets: ["latin"],
@@ -17,8 +19,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${prompt.variable} font-sans`}>
-        {children}
-        <Footer />
+        <UserInfoProvider>
+          {children}
+          <Footer />
+        </UserInfoProvider>
       </body>
     </html>
   );

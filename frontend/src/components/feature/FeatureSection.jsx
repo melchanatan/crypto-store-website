@@ -14,7 +14,7 @@ const FeatureSection = () => {
 
   useEffect(() => {
     fetchProducts().then((data) => {
-      console.log(data);
+      setProductInfos(data);
     });
   }, []);
 

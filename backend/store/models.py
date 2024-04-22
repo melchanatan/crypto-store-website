@@ -42,6 +42,7 @@ class ItemsInCartManager(models.Manager):
     def get_items_in_cart(self, user_id):
         return super().get_queryset().filter(user_cart__user_id=user_id)
 
+
 class CartItem(models.Model):
     user_cart = models.ForeignKey(UserCart, on_delete=models.CASCADE, default=None)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
