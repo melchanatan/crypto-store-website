@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.frontend.namespace }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.frontend.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.frontend.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.frontend.port }}
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: {{ .Values.frontend.healthCheckPath }}
+          #     port: {{ .Values.frontend.port }}
+          #     scheme: HTTP
+          # readinessProbe:
+          #   httpGet:
+          #     path: {{ .Values.frontend.healthCheckPath }}
+          #     port: {{ .Values.frontend.port }}
+          #     scheme: HTTP
+          env:
+            - name: PORT
+              value: "3000"
+      imagePullSecrets:
+      - name: registy-mel

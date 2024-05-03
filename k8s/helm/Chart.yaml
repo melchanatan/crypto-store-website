@@ -1,0 +1,8 @@
+apiVersion: v1
+description: Crypto store frontend Helm chart
+name: crypto-store-frontend
+version: 1.0.0
+appVersion: 1.0.0
+maintainers:
+  - name: mel chanatan
+    email: 9I8g4@example.com

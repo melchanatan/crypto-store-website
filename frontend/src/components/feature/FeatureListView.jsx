@@ -34,7 +34,6 @@ const ListItem = ({ productInfo }) => {
         })
       })
     const data = await response.json()
-    console.log(data)
   };
 
   return (
@@ -67,7 +66,7 @@ const ListItem = ({ productInfo }) => {
               <p className="text-black font-semibold">{price} ETH</p>
             </div>
           </div>
-          <Button text="Place a bid" isSmall={true} onClick={addItemToCart}></Button>
+          <Button text="Place a bid" isSmall={true} onClick={addItemToCart} ></Button>
         </div>
       </article>
     </li>

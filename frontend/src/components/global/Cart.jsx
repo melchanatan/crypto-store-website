@@ -5,34 +5,16 @@ import { FaPlus } from "react-icons/fa6";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { UserInfoContext } from "@/utils/UserInfoProvider";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { UserCartContext } from "@/utils/UserCartProvider";
 
 const Cart = () => {
+    const { userCart, setUserCart, cartItems, initEventListener, setCartItems, isLoading } = useContext(UserCartContext)
     const [isOpen, setIsOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [userCart, setUserCart] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
     const { userInfo } = useContext(UserInfoContext);
 
     const toggleIsOpen = () => {
         setIsOpen(prev => !prev)
     }
-
-    const fetchCartItems = async () => {
-        const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + '/user-cart/' + userInfo.id)
-        const data = await response.json()
-        return {
-            cartItems: data["items_in_cart"],
-            userCart: data["user_cart"]
-        }
-    }
-
-    useEffect(() => {
-        fetchCartItems().then(data => {
-            setCartItems(data.cartItems)
-            setUserCart(data.userCart)
-            setIsLoading(false)
-        })
-    }, [])
 
     const CostTotal = () => {
         const [total, setTotal] = useState(0)
@@ -46,6 +28,7 @@ const Cart = () => {
         }
 
         useEffect(() => {
+            initEventListener()
             getTotal().then(data => {
                 setTotal(data.total)
                 setDiscountPercentage(data.discount_percentage)
@@ -118,6 +101,9 @@ const Cart = () => {
             setPromotionCode(e.target.value)
         }
 
+        useEffect(() => {
+            initEventListener()
+        })
         const handleApply = async () => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user-cart/${userInfo.id}/update_promotion/`,
                 {
@@ -132,7 +118,7 @@ const Cart = () => {
             )
 
             const data = await response.json()
-            // console.log(data)
+
             setMessage(data.message)
         }
 
@@ -140,7 +126,7 @@ const Cart = () => {
             <>
                 <div className="flex">
                     <input type="text" placeholder="discount code" className="w-full bg-gray-200 text-center" value={promotionCode} onChange={handleChange} />
-                    <button className="bg-primary text-white px-3 py-1 font-prompt button-animate" onClick={handleApply}>apply</button>
+                    <button className="bg-primary text-white px-3 py-1 font-prompt button-animate" onClick={handleApply} data-refetch>apply</button>
                 </div>
                 <p>{message}</p>
             </>
@@ -180,7 +166,7 @@ const Cart = () => {
         }
 
         return (
-            <div className="flex items-center justify-between gap-2 font-prompt py-3 px-3">
+            <div className="flex items-center justify-between gap-2 font-prompt py-3 px-3" >
                 <img src="/default-avatar.jpeg" alt="product img" className="w-[32px] h-[32px] object-cover rounded-full" />
                 <label>
                     <h4>{name}</h4>
@@ -194,7 +180,7 @@ const Cart = () => {
                         onBlur={handleConfirm}
                         value={currentQuantity}
                     />
-                    <button className="p-2 bg-red-500 text-white text-xl button-animate" title="delete item" onClick={deleteItemFromCart}>
+                    <button className="p-2 bg-red-500 text-white text-xl button-animate" title="delete item" onClick={deleteItemFromCart} data-refetch>
                         <FaRegTrashCan />
                     </button>
                 </div>
