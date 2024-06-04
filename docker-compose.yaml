@@ -2,7 +2,7 @@ services:
   frontend:
     build:
       context: frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
         - ./frontend/:/home/node/
     ports:
@@ -10,14 +10,13 @@ services:
     user: 1000:1000
     depends_on:
       - backend
+    command: sh -c "npm install && npm run dev"
       
   backend:
     tty: true
     build: 
       context: .
       dockerfile: backend/Dockerfile
-    volumes:
-    - ./backend/:/app
     depends_on:
       - db
     ports:
