@@ -3,12 +3,12 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.frontend.namespace }}
-  labels:
+  labels: 
     app: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.frontend.replicas }}
   selector:
-    matchLabels:
+    matchLabels: 
       app: {{ .Release.Name }}
   template:
     metadata:
