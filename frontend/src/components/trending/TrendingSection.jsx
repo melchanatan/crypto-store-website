@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import TrendingListView from "@/components/trending/TrendingListView";
 

@@ -1,10 +1,15 @@
+'use client'
 import React from "react";
 import Cart from '@/components/global/Cart'
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { IoIosSearch } from "react-icons/io";
 import { IoIosHeartEmpty } from "react-icons/io";
+import Login from "@/components/global/Login";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const { push } = useRouter();
+
   return (
     <nav className="absolute z-10 top-0 flex flex-row w-screen justify-between  items-center padding-page py-[32px]">
       <img
@@ -23,11 +28,13 @@ const Navbar = () => {
           <IoIosHeartEmpty />
         </li>
         <Cart />
-        <img
-          src="/default-avatar.jpeg"
-          alt="user profile"
-          className="c-nav__avatar"
-        />
+        <a onClick={() => push("/api/auth/signin")}>
+          <img
+            src="/default-avatar.jpeg"
+            alt="user profile"
+            className="c-nav__avatar"
+          />
+        </a>
       </ul>
     </nav>
   );
